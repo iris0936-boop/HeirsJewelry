@@ -1,2 +1,0 @@
-# HeirsJewelry
-Heirs Jewelry Website
