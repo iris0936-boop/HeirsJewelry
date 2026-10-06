@@ -1,0 +1,19 @@
+sku,origin,shape,carat,cut,color,clarity,price,lab,certificate,measurements,images,description,available
+RD-1001,Natural,Round,1.02,Ideal,F,VS1,6850,GIA,GIA 2234567890,6.45 x 6.48 x 3.98 mm,,Exceptionally bright round brilliant with hearts-and-arrows symmetry.,yes
+OV-1002,Natural,Oval,1.51,Excellent,G,VS2,8400,GIA,,8.92 x 6.21 x 3.85 mm,,Elongated oval with minimal bow-tie and lively faceting.,yes
+CU-1003,Natural,Cushion,2.03,Excellent,H,SI1,11200,GIA,,,,"Soft, pillowy cushion with crushed-ice sparkle.",yes
+EM-1004,Natural,Emerald,1.20,Very Good,E,VVS2,7100,GIA,,,,"Step-cut emerald with long, elegant hall-of-mirrors flashes.",yes
+PR-1005,Natural,Princess,0.91,Ideal,D,IF,5900,AGS,,,,,yes
+PE-1006,Natural,Pear,1.35,Excellent,F,VS1,7650,GIA,,,,,yes
+RA-1007,Natural,Radiant,1.75,Very Good,I,VS2,6300,IGI,,,,,yes
+MQ-1008,Natural,Marquise,1.10,Good,J,SI2,2900,IGI,,,,,yes
+RD-1009,Natural,Round,2.50,Ideal,E,VVS1,32000,GIA,,,,"A true statement stone. Triple excellent, no fluorescence.",yes
+RD-1010,Natural,Round,0.72,Excellent,G,VS2,2400,GIA,,,,,yes
+OV-1011,Natural,Oval,2.20,Excellent,F,VS1,19800,GIA,,,,,yes
+CU-1012,Natural,Cushion,1.05,Very Good,H,VS2,4100,GIA,,,,,sold
+HT-1013,Natural,Heart,1.01,Very Good,K,SI1,3200,GIA,,,,Warm-toned heart that looks beautiful in yellow gold.,yes
+LG-2001,Lab Grown,Round,2.01,Ideal,E,VVS2,2900,IGI,IGI LG612345678,8.10 x 8.14 x 4.95 mm,,Lab-grown round with the same optics as a top natural stone at a fraction of the price.,yes
+LG-2002,Lab Grown,Oval,3.05,Excellent,F,VS1,4600,IGI,,,,,yes
+LG-2003,Lab Grown,Emerald,2.52,Excellent,G,VS1,3800,IGI,,,,,yes
+LG-2004,Lab Grown,Heart,1.50,Excellent,E,VS2,2100,GIA,,,,,yes
+LG-2005,Lab Grown,Cushion,2.20,Ideal,D,VVS1,3900,IGI,,,,,yes
