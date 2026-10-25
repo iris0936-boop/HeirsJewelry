@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const metadata = { title: "Ring Builder | Heirs Jewelry" };
+export const metadata = { title: "Ring Builder | Heir’s Jewelry" };
 
 export default function RingBuilderStart() {
   return (

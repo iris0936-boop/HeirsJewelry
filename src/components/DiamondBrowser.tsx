@@ -33,12 +33,16 @@ export function DiamondBrowser({
   /** Appended to each card link, e.g. "?setting=pave-halo&metal=Platinum" while building a ring. */
   cardQuery?: string;
 }) {
+  // Carat is optional; bounds come only from stones that have it. No carats at all hides the slider.
   const caratBounds = useMemo(() => {
-    const c = diamonds.map((d) => d.carat);
+    const c = diamonds.map((d) => d.carat).filter((x): x is number => x !== undefined);
+    if (c.length === 0) return [0, 0] as const;
     return [Math.floor(Math.min(...c) * 10) / 10, Math.ceil(Math.max(...c) * 10) / 10] as const;
   }, [diamonds]);
+  const hasCarat = caratBounds[1] > 0;
   const priceBounds = useMemo(() => {
     const p = diamonds.map((d) => d.price);
+    if (p.length === 0) return [0, 0] as const;
     return [Math.floor(Math.min(...p) / 500) * 500, Math.ceil(Math.max(...p) / 500) * 500] as const;
   }, [diamonds]);
 
@@ -54,26 +58,36 @@ export function DiamondBrowser({
   const [sort, setSort] = useState<SortKey>("price-asc");
 
   const results = useMemo(() => {
+    // A stone missing a field still shows until the shopper filters on that field.
+    const matches = <T,>(selected: T[], value: T | undefined) =>
+      selected.length === 0 || (value !== undefined && selected.includes(value));
+    const caratNarrowed = caratMin > caratBounds[0] || caratMax < caratBounds[1];
+
     const list = diamonds.filter(
       (d) =>
         (origin === "All" || d.origin === origin) &&
-        (shapes.length === 0 || shapes.includes(d.shape)) &&
-        (cuts.length === 0 || cuts.includes(d.cut)) &&
-        (colors.length === 0 || colors.includes(d.color)) &&
-        (clarities.length === 0 || clarities.includes(d.clarity)) &&
-        d.carat >= caratMin &&
-        d.carat <= caratMax &&
+        matches(shapes, d.shape) &&
+        matches(cuts, d.cut) &&
+        matches(colors, d.color) &&
+        matches(clarities, d.clarity) &&
+        (!caratNarrowed || (d.carat !== undefined && d.carat >= caratMin && d.carat <= caratMax)) &&
         d.price >= priceMin &&
         d.price <= priceMax,
     );
+    // Unknown carat sorts last in both directions.
+    const byCarat = (dir: 1 | -1) => (a: Diamond, b: Diamond) => {
+      if (a.carat === undefined) return b.carat === undefined ? 0 : 1;
+      if (b.carat === undefined) return -1;
+      return (a.carat - b.carat) * dir;
+    };
     const by: Record<SortKey, (a: Diamond, b: Diamond) => number> = {
       "price-asc": (a, b) => a.price - b.price,
       "price-desc": (a, b) => b.price - a.price,
-      "carat-asc": (a, b) => a.carat - b.carat,
-      "carat-desc": (a, b) => b.carat - a.carat,
+      "carat-asc": byCarat(1),
+      "carat-desc": byCarat(-1),
     };
     return list.sort(by[sort]);
-  }, [diamonds, origin, shapes, cuts, colors, clarities, caratMin, caratMax, priceMin, priceMax, sort]);
+  }, [diamonds, origin, shapes, cuts, colors, clarities, caratMin, caratMax, caratBounds, priceMin, priceMax, sort]);
 
   const reset = () => {
     setOrigin("All");
@@ -137,6 +151,7 @@ export function DiamondBrowser({
           </div>
         </Section>
 
+        {hasCarat && (
         <RangeSection
           title="Carat"
           min={caratBounds[0]}
@@ -149,7 +164,9 @@ export function DiamondBrowser({
           suffix="ct"
           decimals={2}
         />
+        )}
 
+        {priceBounds[1] > 0 && (
         <RangeSection
           title="Price"
           min={priceBounds[0]}
@@ -161,6 +178,7 @@ export function DiamondBrowser({
           onHi={setPriceMax}
           prefix="$"
         />
+        )}
 
         <ChipSection title="Cut" options={CUTS} selected={cuts} onToggle={(v) => setCuts(toggle(cuts, v))} />
         <ChipSection title="Color" options={COLORS} selected={colors} onToggle={(v) => setColors(toggle(colors, v))} />

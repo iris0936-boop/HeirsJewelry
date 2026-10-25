@@ -12,7 +12,7 @@ export function Nav() {
     <header className="sticky top-0 z-20 border-b border-stone-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="font-serif text-xl tracking-wide text-stone-900">
-          YOUR NAME <span className="text-stone-400">Fine Jewelry</span>
+          Heir’s <span className="text-stone-400">Jewelry</span>
         </Link>
         <nav className="flex items-center gap-6 text-sm">
           {links.map((l) => (
@@ -37,7 +37,7 @@ export function Footer() {
     <footer className="mt-24 border-t border-stone-200 bg-stone-50">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 text-sm text-stone-600 sm:grid-cols-3 sm:px-6">
         <div>
-          <p className="font-serif text-lg text-stone-900">YOUR NAME Fine Jewelry</p>
+          <p className="font-serif text-lg text-stone-900">Heir’s Jewelry</p>
           <p className="mt-2">Hand-selected diamonds and custom-designed pieces.</p>
         </div>
         <div>
@@ -60,7 +60,7 @@ export function Footer() {
         </div>
       </div>
       <p className="pb-8 text-center text-xs text-stone-400">
-        © {new Date().getFullYear()} YOUR NAME Fine Jewelry
+        © {new Date().getFullYear()} Heir’s Jewelry
       </p>
     </footer>
   );

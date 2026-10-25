@@ -1,7 +1,7 @@
 import { DesignGallery } from "@/components/DesignGallery";
 import { designs } from "@/data/designs";
 
-export const metadata = { title: "Designs | YOUR NAME Fine Jewelry" };
+export const metadata = { title: "Designs | Heir’s Jewelry" };
 
 export default function DesignsPage() {
   return (

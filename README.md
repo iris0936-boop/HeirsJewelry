@@ -35,21 +35,23 @@ Inventory is a spreadsheet with these columns (header row required, order doesn'
 |---|---|---|
 | `sku` | yes | Unique ID, e.g. `RD-1013` |
 | `origin` | no | `Natural` (default if blank) or `Lab Grown`. Also accepts `lab`, `lab-grown`, `lab created`, `LG`. |
-| `shape` | yes | Round, Oval, Cushion, Princess, Emerald, Pear, Radiant, Marquise, Heart |
-| `carat` | yes | Number, e.g. `1.20` |
-| `cut` | yes | Ideal, Excellent, Very Good, Good |
-| `color` | yes | D through K |
-| `clarity` | yes | FL, IF, VVS1, VVS2, VS1, VS2, SI1, SI2 |
+| `shape` | no | Round, Oval, Cushion, Princess, Emerald, Pear, Radiant, Marquise, Heart |
+| `carat` | no | Number, e.g. `1.20` |
+| `cut` | no | Ideal, Excellent, Very Good, Good |
+| `color` | no | D through K |
+| `clarity` | no | FL, IF, VVS1, VVS2, VS1, VS2, SI1, SI2 |
 | `price` | yes | USD, `$` and commas allowed |
-| `lab` | yes | GIA, IGI, AGS |
+| `lab` | no | GIA, IGI, AGS |
 | `certificate` | no | e.g. `GIA 1234567890` |
 | `measurements` | no | e.g. `6.8 x 6.82 x 4.2 mm` |
 | `images` | no | Image URLs or `/diamonds/file.jpg` paths, separated by `\|` |
 | `description` | no | Free text |
 | `available` | no | Blank or `yes` = for sale. `sold` or `no` hides it. |
 
-Rows with a missing or invalid required field are skipped and logged (Vercel → Functions → Logs), so one typo
-never breaks the site. Allowed values can be extended in `src/data/diamonds.ts`.
+Only `sku` and `price` are required; a row missing either is skipped. Any other field can be blank: the stone still
+shows, just without that detail, and won't match a filter on that field. A value that is filled in but not
+recognized (e.g. `Rund`) is treated as blank and logged (Vercel → Logs). Allowed values can be extended in
+`src/data/diamond-types.ts`.
 
 ### Option A: Google Sheet (recommended)
 
@@ -86,7 +88,7 @@ review page shows **Request this ring** (goes to the inquiry form) instead of **
 |---|---|
 | Product type | `Diamond` (exactly) |
 | Price | The stone's price |
-| SKU | Your SKU, e.g. `RD-1001` (used in the site URL) |
+| SKU | Optional. Your SKU, e.g. `RD-1001` (used in the site URL; the product handle is used if blank) |
 | Inventory | Track quantity, quantity `1`. When it sells, it disappears from the site. |
 | Images | Upload in the product. The first image is used on cards. |
 | Description | Shown on the diamond page |
@@ -107,7 +109,8 @@ Use namespace `custom` (the default) and tick **Storefronts access** on each, or
 | `custom.measurements` | Single line text | optional |
 
 Tip: in each text definition, add the allowed values as a "Choice list" so you pick from a dropdown and can't
-mistype. A product with a missing or invalid value is skipped and logged (Vercel → Logs).
+mistype. Only price is required: a product with missing details still shows, and an unrecognized value is
+ignored and logged (Vercel → Logs).
 
 **Settings:** one product per ring design.
 
@@ -156,7 +159,7 @@ To receive them by email, follow the TODO in `src/app/custom/actions.ts` (Resend
 
 ## Branding
 
-- Replace `YOUR NAME` in `src/components/Nav.tsx` and `src/app/layout.tsx`.
+- The brand name (Heir’s Jewelry) is in `src/components/Nav.tsx` (logo and footer) and the page titles in `src/app/**/page.tsx` and `src/app/layout.tsx`.
 - Contact details are in the footer in `src/components/Nav.tsx`.
 - Colors use Tailwind's `stone` palette. Search and replace `stone-` with another palette (e.g. `zinc-`, `neutral-`) to retheme.
 

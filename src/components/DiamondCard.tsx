@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { type Diamond, formatPrice } from "@/data/diamond-types";
+import { type Diamond, diamondGrades, diamondName, formatPrice } from "@/data/diamond-types";
 import { ShapeIcon } from "./ShapeIcon";
 
 /** Shows the first image, or a soft placeholder with the shape icon when no photo exists yet. */
@@ -9,7 +9,7 @@ export function DiamondImage({ diamond, className = "" }: { diamond: Diamond; cl
     return (
       <img
         src={diamond.images[0]}
-        alt={`${diamond.carat} ct ${diamond.shape} diamond`}
+        alt={diamondName(diamond)}
         className={`h-full w-full object-cover ${className}`}
       />
     );
@@ -18,7 +18,7 @@ export function DiamondImage({ diamond, className = "" }: { diamond: Diamond; cl
     <div
       className={`flex h-full w-full items-center justify-center bg-gradient-to-br from-stone-50 to-stone-200 text-stone-400 ${className}`}
     >
-      <ShapeIcon shape={diamond.shape} className="h-1/2 w-1/2" />
+      <ShapeIcon shape={diamond.shape ?? "Round"} className="h-1/2 w-1/2" />
     </div>
   );
 }
@@ -33,12 +33,8 @@ export function DiamondCard({ diamond, query = "" }: { diamond: Diamond; query?:
         <DiamondImage diamond={diamond} className="transition duration-500 group-hover:scale-105" />
       </div>
       <div className="p-4">
-        <p className="font-medium text-stone-900">
-          {diamond.carat.toFixed(2)} ct {diamond.shape}
-        </p>
-        <p className="mt-1 text-sm text-stone-500">
-          {diamond.cut} · {diamond.color} · {diamond.clarity} · {diamond.lab}
-        </p>
+        <p className="font-medium text-stone-900">{diamondName(diamond)}</p>
+        {diamondGrades(diamond) && <p className="mt-1 text-sm text-stone-500">{diamondGrades(diamond)}</p>}
         <span
           className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[11px] uppercase tracking-wider ${
             diamond.origin === "Lab Grown" ? "bg-accent text-stone-900" : "bg-stone-100 text-stone-600"

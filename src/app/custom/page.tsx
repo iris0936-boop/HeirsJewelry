@@ -1,6 +1,6 @@
 import { InquiryForm } from "@/components/InquiryForm";
 
-export const metadata = { title: "Custom Design | YOUR NAME Fine Jewelry" };
+export const metadata = { title: "Custom Design | Heir’s Jewelry" };
 
 export default async function CustomPage({
   searchParams,

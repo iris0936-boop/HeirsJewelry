@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-  title: "YOUR NAME Fine Jewelry | Diamonds & Custom Design",
+  title: "Heir’s Jewelry | Diamonds & Custom Design",
   description: "Browse hand-selected certified diamonds and explore custom jewelry designs.",
 };
 

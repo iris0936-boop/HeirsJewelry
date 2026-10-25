@@ -7,15 +7,20 @@
 
 const DEFAULT_API_VERSION = "2026-07";
 
+/** Reads an env var, ignoring surrounding spaces and quotes (a common copy-paste mistake in Vercel). */
+function env(name: string): string {
+  return (process.env[name] ?? "").trim().replace(/^["']|["']$/g, "").trim();
+}
+
 export function shopifyConfigured(): boolean {
-  return Boolean(process.env.SHOPIFY_STORE_DOMAIN && process.env.SHOPIFY_STOREFRONT_TOKEN);
+  return Boolean(env("SHOPIFY_STORE_DOMAIN") && env("SHOPIFY_STOREFRONT_TOKEN"));
 }
 
 function endpoint(): string {
-  const raw = (process.env.SHOPIFY_STORE_DOMAIN ?? "").trim().replace(/\/+$/, "");
+  const raw = env("SHOPIFY_STORE_DOMAIN").replace(/\/+$/, "");
   // Accept "store.myshopify.com" or a pasted "https://store.myshopify.com".
   const base = /^https?:\/\//.test(raw) ? raw : `https://${raw}`;
-  const version = process.env.SHOPIFY_API_VERSION || DEFAULT_API_VERSION;
+  const version = env("SHOPIFY_API_VERSION") || DEFAULT_API_VERSION;
   return `${base}/api/${version}/graphql.json`;
 }
 
@@ -39,12 +44,19 @@ export async function storefront<T>(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": process.env.SHOPIFY_STOREFRONT_TOKEN!,
+      "X-Shopify-Storefront-Access-Token": env("SHOPIFY_STOREFRONT_TOKEN"),
     },
     body: JSON.stringify({ query, variables }),
     ...(opts.revalidate !== undefined ? { next: { revalidate: opts.revalidate } } : { cache: "no-store" }),
   });
 
+  if (res.status === 401 || res.status === 403) {
+    throw new Error(
+      `Shopify rejected the Storefront token (${res.status}) for ${env("SHOPIFY_STORE_DOMAIN")}. ` +
+        "Check SHOPIFY_STOREFRONT_TOKEN: it must be the PUBLIC Storefront API token from the Headless channel. " +
+        "A value set in Vercel → Settings → Environment Variables overrides .env.",
+    );
+  }
   if (!res.ok) throw new Error(`Shopify request failed: ${res.status} ${res.statusText}`);
   const json = (await res.json()) as GraphQLResponse<T>;
   if (json.errors?.length) throw new Error(`Shopify error: ${json.errors.map((e) => e.message).join("; ")}`);

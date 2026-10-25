@@ -6,7 +6,7 @@ import { getDiamond } from "@/data/diamonds";
 import { getSetting, RING_SIZES } from "@/data/settings";
 import { shopifyConfigured } from "@/lib/shopify";
 
-export const metadata = { title: "Review Your Ring | Heirs Jewelry" };
+export const metadata = { title: "Review Your Ring | Heir’s Jewelry" };
 
 export default async function ReviewPage({
   searchParams,

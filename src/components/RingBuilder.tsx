@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { formatPrice, type Diamond } from "@/data/diamond-types";
+import { diamondGrades, diamondName, formatPrice, type Diamond } from "@/data/diamond-types";
 import { lowestPrice, type Setting } from "@/data/settings";
 import { builderHref } from "@/lib/builder-href";
 import { DiamondImage } from "./DiamondCard";
@@ -24,7 +24,7 @@ export function BuilderSteps({
     {
       key: "diamond",
       label: "1. Diamond",
-      value: diamond ? `${diamond.carat.toFixed(2)} ct ${diamond.shape} · ${formatPrice(diamond.price)}` : "Choose a diamond",
+      value: diamond ? `${diamondName(diamond)} · ${formatPrice(diamond.price)}` : "Choose a diamond",
       href: builderHref("/diamonds", { setting: setting?.slug, metal }),
     },
     {
@@ -114,12 +114,8 @@ export function DiamondSummary({ diamond }: { diamond: Diamond }) {
         <DiamondImage diamond={diamond} />
       </div>
       <div>
-        <p className="font-medium text-stone-900">
-          {diamond.carat.toFixed(2)} ct {diamond.shape} Diamond
-        </p>
-        <p className="text-sm text-stone-500">
-          {diamond.origin} · {diamond.cut} · {diamond.color} · {diamond.clarity} · {diamond.lab}
-        </p>
+        <p className="font-medium text-stone-900">{diamondName(diamond)}</p>
+        <p className="text-sm text-stone-500">{[diamond.origin, diamondGrades(diamond)].filter(Boolean).join(" · ")}</p>
         <p className="text-sm text-stone-500">SKU {diamond.sku}</p>
       </div>
     </div>

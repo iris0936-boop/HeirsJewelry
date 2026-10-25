@@ -2,7 +2,7 @@ import { BuilderSteps, builderHref, DiamondSummary, SettingCard } from "@/compon
 import { getDiamond } from "@/data/diamonds";
 import { getSettings } from "@/data/settings";
 
-export const metadata = { title: "Choose a Setting | Heirs Jewelry" };
+export const metadata = { title: "Choose a Setting | Heir’s Jewelry" };
 
 export default async function SettingsPage({ searchParams }: { searchParams: Promise<{ diamond?: string }> }) {
   const { diamond: sku } = await searchParams;

@@ -1,0 +1,256 @@
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/settings/[slug]/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/settings/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/favicon.ico
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/globals.css
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/layout.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/CheckoutForm.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/ChooseDiamondButton.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DesignCard.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DesignGallery.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DiamondBrowser.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DiamondCard.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/InquiryForm.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/Nav.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/RingBuilder.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/ShapeIcon.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/csv.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/designs.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/diamond-types.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/diamonds.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/settings.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/lib/builder-href.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/lib/shopify.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/.env
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/.env.example
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/AGENTS.md
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/CLAUDE.md
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/README.md
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/eslint.config.mjs
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/next-env.d.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/next.config.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/package-lock.json
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/package.json
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/postcss.config.mjs
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/tsconfig.json
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/tsconfig.tsbuildinfo
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/vercel.json
+
+🎉 All files processed successfully!
+
+📊 Running comparison...
+
+❌ Failed to download source: Error: ENOENT: no such file or directory, stat '/Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/inventory/diamonds.csv'
+
+────────────────────────────────────────────────────────────
+📅 New run: 2026-10-25T22:41:08.622Z
+────────────────────────────────────────────────────────────
+🔑 Got authentication token
+
+🔍 Fetching latest deployment...
+✅ Found latest deployment (personal account)
+
+📦 Deployment ID:  dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq
+🌐 Deployment URL: ring-builder-9ebazwoxl-heirs-jewelry.vercel.app
+📁 Project:        ring-builder
+
+📋 Fetching file tree from API...
+
+✅ Got file tree (17 top-level entries)
+
+📁 Output directory: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source
+
+⬇️  Downloading files...
+   (Use --verbose to see detailed progress)
+
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/inventory/diamonds.csv
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/public/file.svg
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/public/globe.svg
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/public/next.svg
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/public/vercel.svg
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/public/window.svg
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/custom/actions.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/custom/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/designs/[slug]/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/designs/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/diamonds/[sku]/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/diamonds/page.tsx
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/review/actions.ts
+✅ Downloaded: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/review/page.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/settings/[slug]/page.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/settings/page.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/ring-builder/page.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/favicon.ico
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/globals.css
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/layout.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/app/page.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/CheckoutForm.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/ChooseDiamondButton.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DesignCard.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DesignGallery.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DiamondBrowser.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/DiamondCard.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/InquiryForm.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/Nav.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/RingBuilder.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/components/ShapeIcon.tsx
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/csv.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/designs.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/diamond-types.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/diamonds.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/data/settings.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/lib/builder-href.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/src/lib/shopify.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/.env
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/.env.example
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/AGENTS.md
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/CLAUDE.md
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/README.md
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/eslint.config.mjs
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/next-env.d.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/next.config.ts
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/package-lock.json
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/package.json
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/postcss.config.mjs
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/tsconfig.json
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/tsconfig.tsbuildinfo
+⏭️  Skipping (already exists): /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/source/vercel.json
+
+🎉 All files processed successfully!
+
+📊 Running comparison...
+
+📁 Total files: 52
+   ✅ Downloaded: 14
+   ⏭️  Skipped: 38
+   ❌ Failed: 0
+💾 Total size: 0.46 MB
+
+📈 File types breakdown:
+   tsx               21 files
+   ts                11 files
+   svg                5 files
+   json               4 files
+   md                 3 files
+   mjs                2 files
+   csv                1 files
+   ico                1 files
+   css                1 files
+   env                1 files
+
+🌳 File structure tree:
+
+├── 📁 inventory
+│   └── 📄 diamonds.csv
+├── 📁 public
+│   ├── 📄 file.svg
+│   ├── 📄 globe.svg
+│   ├── 📄 next.svg
+│   ├── 📄 vercel.svg
+│   └── 📄 window.svg
+├── 📁 src
+│   ├── 📁 app
+│   │   ├── 📁 custom
+│   │   │   ├── 📄 actions.ts
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📁 designs
+│   │   │   ├── 📁 [slug]
+│   │   │   │   └── 📄 page.tsx
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📁 diamonds
+│   │   │   ├── 📁 [sku]
+│   │   │   │   └── 📄 page.tsx
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📁 ring-builder
+│   │   │   ├── 📁 review
+│   │   │   │   ├── 📄 actions.ts
+│   │   │   │   └── 📄 page.tsx
+│   │   │   ├── 📁 settings
+│   │   │   │   ├── 📁 [slug]
+│   │   │   │   │   └── 📄 page.tsx
+│   │   │   │   └── 📄 page.tsx
+│   │   │   └── 📄 page.tsx
+│   │   ├── 📄 favicon.ico
+│   │   ├── 📄 globals.css
+│   │   ├── 📄 layout.tsx
+│   │   └── 📄 page.tsx
+│   ├── 📁 components
+│   │   ├── 📄 CheckoutForm.tsx
+│   │   ├── 📄 ChooseDiamondButton.tsx
+│   │   ├── 📄 DesignCard.tsx
+│   │   ├── 📄 DesignGallery.tsx
+│   │   ├── 📄 DiamondBrowser.tsx
+│   │   ├── 📄 DiamondCard.tsx
+│   │   ├── 📄 InquiryForm.tsx
+│   │   ├── 📄 Nav.tsx
+│   │   ├── 📄 RingBuilder.tsx
+│   │   └── 📄 ShapeIcon.tsx
+│   ├── 📁 data
+│   │   ├── 📄 csv.ts
+│   │   ├── 📄 designs.ts
+│   │   ├── 📄 diamond-types.ts
+│   │   ├── 📄 diamonds.ts
+│   │   └── 📄 settings.ts
+│   └── 📁 lib
+│       ├── 📄 builder-href.ts
+│       └── 📄 shopify.ts
+├── 📄 .env
+├── 📄 .env.example
+├── 📄 AGENTS.md
+├── 📄 CLAUDE.md
+├── 📄 eslint.config.mjs
+├── 📄 next-env.d.ts
+├── 📄 next.config.ts
+├── 📄 package-lock.json
+├── 📄 package.json
+├── 📄 postcss.config.mjs
+├── 📄 README.md
+├── 📄 tsconfig.json
+├── 📄 tsconfig.tsbuildinfo
+└── 📄 vercel.json
+
+⏭️ Skipped files (already existed): 38
+   src/app/ring-builder/settings/[slug]/page.tsx
+   src/app/ring-builder/settings/page.tsx
+   src/app/ring-builder/page.tsx
+   src/app/favicon.ico
+   src/app/globals.css
+   src/app/layout.tsx
+   src/app/page.tsx
+   src/components/CheckoutForm.tsx
+   src/components/ChooseDiamondButton.tsx
+   src/components/DesignCard.tsx
+   src/components/DesignGallery.tsx
+   src/components/DiamondBrowser.tsx
+   src/components/DiamondCard.tsx
+   src/components/InquiryForm.tsx
+   src/components/Nav.tsx
+   src/components/RingBuilder.tsx
+   src/components/ShapeIcon.tsx
+   src/data/csv.ts
+   src/data/designs.ts
+   src/data/diamond-types.ts
+   src/data/diamonds.ts
+   src/data/settings.ts
+   src/lib/builder-href.ts
+   src/lib/shopify.ts
+   .env
+   .env.example
+   AGENTS.md
+   CLAUDE.md
+   README.md
+   eslint.config.mjs
+   next-env.d.ts
+   next.config.ts
+   package-lock.json
+   package.json
+   postcss.config.mjs
+   tsconfig.json
+   tsconfig.tsbuildinfo
+   vercel.json
+
+✨ Download and verification complete!
+📄 Full log saved to: /Users/iriswang/HeirsJewelry/out/dpl_GWJq5ygrwrnSE8rjKSg4Z5AVbryq/download-log.txt
+   (Use --verbose to see file tree and skipped files)
+

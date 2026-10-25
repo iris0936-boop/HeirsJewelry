@@ -4,7 +4,7 @@ import { DiamondImage } from "@/components/DiamondCard";
 import { Suspense } from "react";
 import { ChooseDiamondButton } from "@/components/ChooseDiamondButton";
 import { builderHref, SettingCard } from "@/components/RingBuilder";
-import { formatPrice, getDiamond, getDiamonds } from "@/data/diamonds";
+import { diamondName, formatPrice, getDiamond, getDiamonds } from "@/data/diamonds";
 import { getSettings } from "@/data/settings";
 
 // Re-check inventory every 60s (keep in sync with INVENTORY_REVALIDATE_SECONDS).
@@ -21,17 +21,33 @@ export default async function DiamondPage({ params }: { params: Promise<{ sku: s
   const diamond = await getDiamond(sku);
   if (!diamond) notFound();
 
-  const specs: [string, string][] = [
-    ["Origin", diamond.origin],
-    ["Shape", diamond.shape],
-    ["Carat", diamond.carat.toFixed(2)],
-    ["Cut", diamond.cut],
-    ["Color", diamond.color],
-    ["Clarity", diamond.clarity],
-    ["Lab", diamond.lab],
-  ];
-  if (diamond.measurements) specs.push(["Measurements", diamond.measurements]);
-  if (diamond.certificate) specs.push(["Certificate", diamond.certificate]);
+  // Only list the details this stone actually has.
+  const specs = (
+    [
+      ["Origin", diamond.origin],
+      ["Shape", diamond.shape],
+      ["Carat", diamond.carat?.toFixed(2)],
+      ["Cut", diamond.cut],
+      ["Color", diamond.color],
+      ["Clarity", diamond.clarity],
+      ["Lab", diamond.lab],
+      ["Measurements", diamond.measurements],
+      ["Certificate", diamond.certificate],
+    ] as [string, string | undefined][]
+  ).filter((row): row is [string, string] => Boolean(row[1]));
+
+  const heading =
+    diamond.carat && diamond.shape
+      ? `${diamond.carat.toFixed(2)} Carat ${diamond.shape} Diamond`
+      : diamondName(diamond);
+  const subtitle = [
+    diamond.origin,
+    diamond.cut && `${diamond.cut} cut`,
+    diamond.color && `${diamond.color} color`,
+    diamond.clarity && `${diamond.clarity} clarity`,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   const settings = (await getSettings()).slice(0, 4);
 
@@ -50,12 +66,8 @@ export default async function DiamondPage({ params }: { params: Promise<{ sku: s
           <p className="text-sm uppercase tracking-wider text-stone-500">
             {diamond.sku} · {diamond.origin}
           </p>
-          <h1 className="mt-2 font-serif text-4xl text-stone-900">
-            {diamond.carat.toFixed(2)} Carat {diamond.shape} Diamond
-          </h1>
-          <p className="mt-2 text-lg text-stone-600">
-            {diamond.origin} · {diamond.cut} cut · {diamond.color} color · {diamond.clarity} clarity
-          </p>
+          <h1 className="mt-2 font-serif text-4xl text-stone-900">{heading}</h1>
+          <p className="mt-2 text-lg text-stone-600">{subtitle}</p>
           <p className="mt-6 text-3xl font-semibold text-stone-900">{formatPrice(diamond.price)}</p>
 
           {diamond.description && <p className="mt-6 text-stone-600">{diamond.description}</p>}
@@ -89,7 +101,9 @@ export default async function DiamondPage({ params }: { params: Promise<{ sku: s
 
       <section className="mt-24">
         <h2 className="font-serif text-3xl text-stone-900">Settings for this stone</h2>
-        <p className="mt-2 text-stone-600">Every setting fits a {diamond.shape.toLowerCase()} center.</p>
+        <p className="mt-2 text-stone-600">
+          Every setting fits {diamond.shape ? `a ${diamond.shape.toLowerCase()}` : "this"} center stone.
+        </p>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {settings.map((s) => (
             <SettingCard

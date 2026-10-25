@@ -3,7 +3,7 @@ import { BuilderSteps, builderHref } from "@/components/RingBuilder";
 import { getDiamonds, SHAPES, type Shape } from "@/data/diamonds";
 import { getSetting } from "@/data/settings";
 
-export const metadata = { title: "Diamonds | Heirs Jewelry" };
+export const metadata = { title: "Diamonds | Heir’s Jewelry" };
 
 export default async function DiamondsPage({
   searchParams,

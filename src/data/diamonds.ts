@@ -53,42 +53,46 @@ function toNumber(value: string): number | undefined {
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 
-/** Converts one CSV row into a Diamond, or returns a reason it was rejected. */
-function rowToDiamond(row: Record<string, string>): { diamond: Diamond } | { error: string } {
+/**
+ * Converts one row (CSV or Shopify) into a Diamond.
+ * Only sku and price are required. Any other field that is blank is left out; a field that is filled in
+ * but not recognized (e.g. shape "Rund") is also left out, with a warning so it can be fixed.
+ */
+function rowToDiamond(
+  row: Record<string, string>,
+): { diamond: Diamond; warnings: string[] } | { error: string } {
   const sku = (row.sku ?? "").trim();
   if (!sku) return { error: "missing sku" };
-
-  const origin = toOrigin(row.origin ?? row.type ?? "");
-  const shape = pick(row.shape ?? "", SHAPES);
-  const cut = pick(row.cut ?? "", CUTS);
-  const color = pick(row.color ?? "", COLORS);
-  const clarity = pick(row.clarity ?? "", CLARITIES);
-  const lab = pick(row.lab ?? "", LABS);
-  const carat = toNumber(row.carat ?? "");
   const price = toNumber(row.price ?? "");
+  if (!price) return { error: `${sku}: missing or invalid price "${row.price ?? ""}"` };
 
-  const problems: string[] = [];
-  if (!origin) problems.push(`origin "${row.origin ?? row.type}" (use Natural or Lab Grown)`);
-  if (!shape) problems.push(`shape "${row.shape}"`);
-  if (!cut) problems.push(`cut "${row.cut}"`);
-  if (!color) problems.push(`color "${row.color}"`);
-  if (!clarity) problems.push(`clarity "${row.clarity}"`);
-  if (!lab) problems.push(`lab "${row.lab}"`);
-  if (!carat) problems.push(`carat "${row.carat}"`);
-  if (!price) problems.push(`price "${row.price}"`);
-  if (problems.length) return { error: `${sku}: invalid ${problems.join(", ")}` };
+  const warnings: string[] = [];
+  /** Returns the parsed value, or undefined (warning only if something was typed but not understood). */
+  function optional<T>(field: string, parse: (v: string) => T | undefined, hint?: string): T | undefined {
+    const raw = (row[field] ?? "").trim();
+    if (!raw) return undefined;
+    const value = parse(raw);
+    if (value === undefined) warnings.push(`unrecognized ${field} "${raw}"${hint ? ` (${hint})` : ""}`);
+    return value;
+  }
+
+  const rawOrigin = row.origin ?? row.type ?? "";
+  const origin = toOrigin(rawOrigin);
+  if (!origin) warnings.push(`unrecognized origin "${rawOrigin}" (use Natural or Lab Grown), showing as Natural`);
 
   return {
+    warnings,
     diamond: {
       sku,
-      origin: origin!,
-      shape: shape!,
-      cut: cut!,
-      color: color!,
-      clarity: clarity!,
-      lab: lab!,
-      carat: carat!,
-      price: price!,
+      price,
+      title: row.title?.trim() || undefined,
+      origin: origin ?? "Natural",
+      shape: optional("shape", (v) => pick(v, SHAPES), SHAPES.join(", ")),
+      carat: optional("carat", toNumber),
+      cut: optional("cut", (v) => pick(v, CUTS), CUTS.join(", ")),
+      color: optional("color", (v) => pick(v, COLORS), "D to K"),
+      clarity: optional("clarity", (v) => pick(v, CLARITIES), CLARITIES.join(", ")),
+      lab: optional("lab", (v) => pick(v, LABS), LABS.join(", ")),
       certificate: row.certificate?.trim() || undefined,
       measurements: row.measurements?.trim() || undefined,
       description: row.description?.trim() || undefined,
@@ -128,6 +132,7 @@ function shopifyProductToRow(p: ShopifyProduct): { row: Record<string, string>; 
     variantId: variant?.id,
     row: {
       sku: variant?.sku?.trim() || p.handle,
+      title: p.title,
       origin: meta.origin ?? "",
       shape: meta.shape ?? "",
       carat: meta.carat ?? "",
@@ -169,6 +174,9 @@ const loadAll = cache(async (): Promise<Diamond[]> => {
     if (seen.has(result.diamond.sku)) {
       console.warn(`[inventory] skipping ${label}: duplicate sku ${result.diamond.sku}`);
       continue;
+    }
+    if (result.warnings.length) {
+      console.warn(`[inventory] ${label} (${result.diamond.sku}): ${result.warnings.join("; ")}`);
     }
     seen.add(result.diamond.sku);
     out.push({ ...result.diamond, variantId });
