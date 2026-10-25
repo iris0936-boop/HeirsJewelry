@@ -18,6 +18,12 @@ export interface Design {
   description: string;
   images: string[]; // paths under /public, e.g. "/designs/halo-ring.jpg"
   startingPrice?: number; // setting only, USD
+  /**
+   * Engagement rings only: metal choices and fixed setting price for each.
+   * Used by the ring builder when inventory is NOT coming from Shopify.
+   * With Shopify, prices come from the setting product's "Metal" variants instead.
+   */
+  metals?: { name: string; price: number }[];
 }
 
 export const designs: Design[] = [
@@ -30,6 +36,12 @@ export const designs: Design[] = [
       "Six-prong solitaire with a knife-edge band. Timeless, and lets the center stone do the talking.",
     images: [],
     startingPrice: 1800,
+    metals: [
+      { name: "14k White Gold", price: 1500 },
+      { name: "14k Yellow Gold", price: 1500 },
+      { name: "18k White Gold", price: 1800 },
+      { name: "Platinum", price: 2100 },
+    ],
   },
   {
     slug: "pave-halo",
@@ -40,6 +52,12 @@ export const designs: Design[] = [
       "A single halo of micro-pavé diamonds that makes the center stone appear a full carat larger.",
     images: [],
     startingPrice: 2600,
+    metals: [
+      { name: "14k White Gold", price: 2200 },
+      { name: "18k White Gold", price: 2600 },
+      { name: "18k Rose Gold", price: 2600 },
+      { name: "Platinum", price: 3100 },
+    ],
   },
   {
     slug: "hidden-halo-oval",
@@ -50,6 +68,12 @@ export const designs: Design[] = [
       "Clean profile from above, with a surprise ring of diamonds beneath the center stone.",
     images: [],
     startingPrice: 2200,
+    metals: [
+      { name: "14k Yellow Gold", price: 1900 },
+      { name: "18k Yellow Gold", price: 2200 },
+      { name: "18k White Gold", price: 2200 },
+      { name: "Platinum", price: 2700 },
+    ],
   },
   {
     slug: "three-stone-trellis",
@@ -59,6 +83,11 @@ export const designs: Design[] = [
     description: "Past, present, and future. Interwoven trellis prongs hold three stones.",
     images: [],
     startingPrice: 3400,
+    metals: [
+      { name: "18k White Gold", price: 3000 },
+      { name: "18k Yellow Gold", price: 3000 },
+      { name: "Platinum", price: 3400 },
+    ],
   },
   {
     slug: "eternity-band",

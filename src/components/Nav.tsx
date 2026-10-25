@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const links = [
+  { href: "/ring-builder", label: "Ring Builder" },
   { href: "/diamonds", label: "Diamonds" },
   { href: "/designs", label: "Designs" },
   { href: "/custom", label: "Custom" },
@@ -21,7 +22,7 @@ export function Nav() {
           ))}
           <Link
             href="/custom"
-            className="rounded-full bg-stone-900 px-4 py-2 text-white transition hover:bg-stone-700"
+            className="rounded-full bg-accent px-4 py-2 font-medium text-stone-900 transition hover:bg-accent-hover"
           >
             Book a consult
           </Link>

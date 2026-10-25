@@ -3,6 +3,11 @@
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+
+  /* Brand accent. Change these three values to retheme the whole site. */
+  --color-accent: #f9bbbf;
+  --color-accent-hover: #f5a3a9; /* slightly deeper, for hover */
+  --color-accent-soft: #fdeeef; /* pale tint, for backgrounds */
 }
 
 body {
@@ -10,4 +15,63 @@ body {
   color: #1c1917;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* The accent is a light pink, so text on it stays dark (stone-900) for readable contrast. */
+@layer components {
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 font-medium text-stone-900 transition hover:bg-accent-hover;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border border-stone-300 px-6 py-3 text-stone-900 transition hover:border-stone-900;
+  }
+}
+
+/* Dual-handle range slider: two range inputs stacked on one track; only the thumbs take clicks. */
+.dual-range {
+  position: relative;
+  height: 1.25rem;
+}
+.dual-range input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.dual-range input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+.dual-range input[type="range"]::-moz-range-track {
+  background: transparent;
+}
+.dual-range input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 9999px;
+  background: #fff;
+  border: 2px solid #1c1917;
+  cursor: pointer;
+}
+.dual-range input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  background: #fff;
+  border: 2px solid #1c1917;
+  cursor: pointer;
+}
+.dual-range input[type="range"]:focus-visible::-webkit-slider-thumb {
+  outline: 3px solid var(--color-accent-hover);
+  outline-offset: 2px;
+}
+.dual-range input[type="range"]:focus-visible::-moz-range-thumb {
+  outline: 3px solid var(--color-accent-hover);
+  outline-offset: 2px;
 }

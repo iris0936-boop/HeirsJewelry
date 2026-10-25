@@ -17,7 +17,7 @@ export function DesignGallery({ designs }: { designs: Design[] }) {
             onClick={() => setCategory(c)}
             className={`rounded-full border px-4 py-1.5 text-sm transition ${
               category === c
-                ? "border-stone-900 bg-stone-900 text-white"
+                ? "border-accent bg-accent text-stone-900"
                 : "border-stone-200 text-stone-600 hover:border-stone-400"
             }`}
           >

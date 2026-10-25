@@ -27,7 +27,7 @@ export default async function CustomPage({
               ["Delivery", "Delivered insured, with the diamond's certificate and an appraisal."],
             ].map(([t, d], i) => (
               <li key={t} className="flex gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-stone-900 text-sm text-white">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-medium text-stone-900">
                   {i + 1}
                 </span>
                 <div>

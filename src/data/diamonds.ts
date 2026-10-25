@@ -1,9 +1,12 @@
-// Diamond inventory. Loaded from a CSV: either a Google Sheet (when INVENTORY_URL is set)
-// or the local file inventory/diamonds.csv. See README "Updating inventory".
+// Diamond inventory. Source is chosen by INVENTORY_SOURCE:
+//   "shopify"      products with product type "Diamond" in your Shopify store (enables online checkout)
+//   "csv" (default) a Google Sheet (when INVENTORY_URL is set) or the local file inventory/diamonds.csv
+// See README "Updating inventory".
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { cache } from "react";
+import { getProductsByType, shopifyConfigured, type ShopifyProduct } from "@/lib/shopify";
 import { parseCsv } from "./csv";
 import { CLARITIES, COLORS, CUTS, LABS, SHAPES, type Diamond, type Origin } from "./diamond-types";
 
@@ -98,24 +101,77 @@ function rowToDiamond(row: Record<string, string>): { diamond: Diamond } | { err
   };
 }
 
-/** All diamonds in the sheet, including sold ones. Cached per request. */
+export function inventoryFromShopify(): boolean {
+  return process.env.INVENTORY_SOURCE?.trim().toLowerCase() === "shopify" && shopifyConfigured();
+}
+
+/** Reads a metafield value. List-type metafields come back as JSON arrays; use the first entry. */
+function metafieldText(value: string | undefined): string {
+  if (!value) return "";
+  if (value.startsWith("[")) {
+    try {
+      const arr = JSON.parse(value);
+      return Array.isArray(arr) ? String(arr[0] ?? "") : value;
+    } catch {
+      return value;
+    }
+  }
+  return value;
+}
+
+/** Turns a Shopify "Diamond" product into the same row shape the CSV uses, so both share validation. */
+function shopifyProductToRow(p: ShopifyProduct): { row: Record<string, string>; variantId?: string } {
+  const variant = p.variants.nodes[0];
+  const meta: Record<string, string> = {};
+  for (const m of p.metafields) if (m) meta[m.key] = metafieldText(m.value);
+  return {
+    variantId: variant?.id,
+    row: {
+      sku: variant?.sku?.trim() || p.handle,
+      origin: meta.origin ?? "",
+      shape: meta.shape ?? "",
+      carat: meta.carat ?? "",
+      cut: meta.cut ?? "",
+      color: meta.color ?? "",
+      clarity: meta.clarity ?? "",
+      lab: meta.lab ?? "",
+      certificate: meta.certificate ?? "",
+      measurements: meta.measurements ?? "",
+      price: variant?.price.amount ?? "",
+      images: p.images.nodes.map((i) => i.url).join("|"),
+      description: p.description,
+      // Sold out in Shopify (inventory 0) hides the stone on the site.
+      available: variant?.availableForSale ? "yes" : "no",
+    },
+  };
+}
+
+async function loadRows(): Promise<{ row: Record<string, string>; variantId?: string; label: string }[]> {
+  if (inventoryFromShopify()) {
+    const products = await getProductsByType("Diamond", INVENTORY_REVALIDATE_SECONDS);
+    return products.map((p) => ({ ...shopifyProductToRow(p), label: `Shopify product "${p.handle}"` }));
+  }
+  const rows = parseCsv(await loadCsvText());
+  return rows.map((row, i) => ({ row, label: `row ${i + 2}` }));
+}
+
+/** All diamonds, including sold ones. Cached per request. */
 const loadAll = cache(async (): Promise<Diamond[]> => {
-  const text = await loadCsvText();
-  const rows = parseCsv(text);
+  const rows = await loadRows();
   const out: Diamond[] = [];
   const seen = new Set<string>();
-  for (const [i, row] of rows.entries()) {
+  for (const { row, variantId, label } of rows) {
     const result = rowToDiamond(row);
     if ("error" in result) {
-      console.warn(`[inventory] skipping row ${i + 2}: ${result.error}`);
+      console.warn(`[inventory] skipping ${label}: ${result.error}`);
       continue;
     }
     if (seen.has(result.diamond.sku)) {
-      console.warn(`[inventory] skipping row ${i + 2}: duplicate sku ${result.diamond.sku}`);
+      console.warn(`[inventory] skipping ${label}: duplicate sku ${result.diamond.sku}`);
       continue;
     }
     seen.add(result.diamond.sku);
-    out.push(result.diamond);
+    out.push({ ...result.diamond, variantId });
   }
   return out;
 });

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DiamondImage } from "@/components/DiamondCard";
-import { DesignCard } from "@/components/DesignCard";
+import { Suspense } from "react";
+import { ChooseDiamondButton } from "@/components/ChooseDiamondButton";
+import { builderHref, SettingCard } from "@/components/RingBuilder";
 import { formatPrice, getDiamond, getDiamonds } from "@/data/diamonds";
-import { designs } from "@/data/designs";
+import { getSettings } from "@/data/settings";
 
 // Re-check inventory every 60s (keep in sync with INVENTORY_REVALIDATE_SECONDS).
 export const revalidate = 60;
@@ -31,7 +33,7 @@ export default async function DiamondPage({ params }: { params: Promise<{ sku: s
   if (diamond.measurements) specs.push(["Measurements", diamond.measurements]);
   if (diamond.certificate) specs.push(["Certificate", diamond.certificate]);
 
-  const settings = designs.filter((d) => d.category === "Engagement Rings").slice(0, 4);
+  const settings = (await getSettings()).slice(0, 4);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -58,18 +60,19 @@ export default async function DiamondPage({ params }: { params: Promise<{ sku: s
 
           {diamond.description && <p className="mt-6 text-stone-600">{diamond.description}</p>}
 
-          <div className="mt-8 flex gap-3">
-            <Link
-              href={`/custom?sku=${diamond.sku}`}
-              className="rounded-full bg-stone-900 px-6 py-3 text-white hover:bg-stone-700"
+          <div className="mt-8 flex flex-wrap gap-3">
+            {/* Reads ?setting=&metal= on the client so this page can stay statically cached. */}
+            <Suspense
+              fallback={
+                <Link href={builderHref("/ring-builder/settings", { diamond: diamond.sku })} className="btn-accent">
+                  Choose this diamond
+                </Link>
+              }
             >
-              Inquire about this stone
-            </Link>
-            <Link
-              href={`/custom?sku=${diamond.sku}`}
-              className="rounded-full border border-stone-300 px-6 py-3 text-stone-900 hover:border-stone-900"
-            >
-              Design a setting
+              <ChooseDiamondButton sku={diamond.sku} />
+            </Suspense>
+            <Link href={`/custom?sku=${diamond.sku}`} className="btn-outline">
+              Ask about this stone
             </Link>
           </div>
 
@@ -86,10 +89,14 @@ export default async function DiamondPage({ params }: { params: Promise<{ sku: s
 
       <section className="mt-24">
         <h2 className="font-serif text-3xl text-stone-900">Settings for this stone</h2>
-        <p className="mt-2 text-stone-600">Any of these can be adapted to a {diamond.shape.toLowerCase()} center.</p>
+        <p className="mt-2 text-stone-600">Every setting fits a {diamond.shape.toLowerCase()} center.</p>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {settings.map((d) => (
-            <DesignCard key={d.slug} design={d} />
+          {settings.map((s) => (
+            <SettingCard
+              key={s.slug}
+              setting={s}
+              href={builderHref(`/ring-builder/settings/${s.slug}`, { diamond: diamond.sku })}
+            />
           ))}
         </div>
       </section>

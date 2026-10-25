@@ -13,7 +13,6 @@ import {
   type Origin,
   ORIGINS,
   type Shape,
-  formatPrice,
 } from "@/data/diamond-types";
 import { DiamondCard } from "./DiamondCard";
 import { ShapeIcon } from "./ShapeIcon";
@@ -27,9 +26,12 @@ function toggle<T>(list: T[], item: T): T[] {
 export function DiamondBrowser({
   diamonds,
   initialShapes = [],
+  cardQuery = "",
 }: {
   diamonds: Diamond[];
   initialShapes?: Shape[];
+  /** Appended to each card link, e.g. "?setting=pave-halo&metal=Platinum" while building a ring. */
+  cardQuery?: string;
 }) {
   const caratBounds = useMemo(() => {
     const c = diamonds.map((d) => d.carat);
@@ -103,7 +105,7 @@ export function DiamondBrowser({
                 key={o}
                 onClick={() => setOrigin(o)}
                 className={`py-2 transition ${
-                  origin === o ? "bg-stone-900 text-white" : "text-stone-600 hover:bg-stone-50"
+                  origin === o ? "bg-accent font-medium text-stone-900" : "text-stone-600 hover:bg-accent-soft"
                 }`}
               >
                 {o}
@@ -123,7 +125,7 @@ export function DiamondBrowser({
                   title={s}
                   className={`flex flex-col items-center gap-1 rounded-xl border p-2 text-[10px] transition ${
                     on
-                      ? "border-stone-900 bg-stone-900 text-white"
+                      ? "border-accent bg-accent text-stone-900"
                       : "border-stone-200 text-stone-600 hover:border-stone-400"
                   }`}
                 >
@@ -144,7 +146,8 @@ export function DiamondBrowser({
           hi={caratMax}
           onLo={setCaratMin}
           onHi={setCaratMax}
-          format={(v) => v.toFixed(1)}
+          suffix="ct"
+          decimals={2}
         />
 
         <RangeSection
@@ -156,7 +159,7 @@ export function DiamondBrowser({
           hi={priceMax}
           onLo={setPriceMin}
           onHi={setPriceMax}
-          format={formatPrice}
+          prefix="$"
         />
 
         <ChipSection title="Cut" options={CUTS} selected={cuts} onToggle={(v) => setCuts(toggle(cuts, v))} />
@@ -200,7 +203,7 @@ export function DiamondBrowser({
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {results.map((d) => (
-              <DiamondCard key={d.sku} diamond={d} />
+              <DiamondCard key={d.sku} diamond={d} query={cardQuery} />
             ))}
           </div>
         )}
@@ -239,7 +242,7 @@ function ChipSection<T extends string>({
               key={o}
               onClick={() => onToggle(o)}
               className={`rounded-full border px-3 py-1 text-xs transition ${
-                on ? "border-stone-900 bg-stone-900 text-white" : "border-stone-200 text-stone-600 hover:border-stone-400"
+                on ? "border-accent bg-accent text-stone-900" : "border-stone-200 text-stone-600 hover:border-stone-400"
               }`}
             >
               {o}
@@ -251,6 +254,7 @@ function ChipSection<T extends string>({
   );
 }
 
+/** One slider track with two handles, plus editable Min / Max boxes. */
 function RangeSection({
   title,
   min,
@@ -260,7 +264,9 @@ function RangeSection({
   hi,
   onLo,
   onHi,
-  format,
+  prefix = "",
+  suffix = "",
+  decimals = 0,
 }: {
   title: string;
   min: number;
@@ -270,15 +276,23 @@ function RangeSection({
   hi: number;
   onLo: (v: number) => void;
   onHi: (v: number) => void;
-  format: (v: number) => string;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
 }) {
+  const span = max - min || 1;
+  const left = ((lo - min) / span) * 100;
+  const right = ((hi - min) / span) * 100;
+
   return (
     <Section title={title}>
-      <div className="mb-2 flex justify-between text-xs text-stone-600">
-        <span>{format(lo)}</span>
-        <span>{format(hi)}</span>
-      </div>
-      <div className="space-y-2">
+      <div className="dual-range">
+        {/* Track and the highlighted segment between the two handles */}
+        <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-stone-200" />
+        <div
+          className="absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-accent-hover"
+          style={{ left: `${left}%`, width: `${right - left}%` }}
+        />
         <input
           type="range"
           min={min}
@@ -286,8 +300,9 @@ function RangeSection({
           step={step}
           value={lo}
           onChange={(e) => onLo(Math.min(Number(e.target.value), hi))}
-          className="w-full accent-stone-900"
-          aria-label={`${title} minimum`}
+          aria-label={`${title} minimum slider`}
+          // Keep the low handle on top when both are pushed to the right edge, so it can still be dragged.
+          style={{ zIndex: lo >= max - step ? 2 : 1 }}
         />
         <input
           type="range"
@@ -296,10 +311,78 @@ function RangeSection({
           step={step}
           value={hi}
           onChange={(e) => onHi(Math.max(Number(e.target.value), lo))}
-          className="w-full accent-stone-900"
-          aria-label={`${title} maximum`}
+          aria-label={`${title} maximum slider`}
+        />
+      </div>
+
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <NumberBox
+          label="Min"
+          ariaLabel={`${title} minimum`}
+          value={lo}
+          prefix={prefix}
+          suffix={suffix}
+          decimals={decimals}
+          onCommit={(v) => onLo(Math.min(Math.max(v, min), hi))}
+        />
+        <NumberBox
+          label="Max"
+          ariaLabel={`${title} maximum`}
+          value={hi}
+          prefix={prefix}
+          suffix={suffix}
+          decimals={decimals}
+          onCommit={(v) => onHi(Math.max(Math.min(v, max), lo))}
         />
       </div>
     </Section>
+  );
+}
+
+/** Text box that lets the shopper type freely and applies the value on Enter or when they leave the box. */
+function NumberBox({
+  label,
+  ariaLabel,
+  value,
+  prefix,
+  suffix,
+  decimals,
+  onCommit,
+}: {
+  label: string;
+  ariaLabel: string;
+  value: number;
+  prefix: string;
+  suffix: string;
+  decimals: number;
+  onCommit: (v: number) => void;
+}) {
+  const shown = value.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  const [draft, setDraft] = useState<string | null>(null);
+
+  const commit = () => {
+    if (draft === null) return;
+    const n = Number(draft.replace(/[$,\s]/g, ""));
+    if (Number.isFinite(n) && draft.trim() !== "") onCommit(n);
+    setDraft(null);
+  };
+
+  return (
+    <label className="block">
+      <span className="text-[11px] uppercase tracking-wider text-stone-500">{label}</span>
+      <span className="mt-1 flex items-center rounded-lg border border-stone-200 px-2 py-1.5 text-sm focus-within:border-stone-900">
+        {prefix && <span className="text-stone-400">{prefix}</span>}
+        <input
+          inputMode="decimal"
+          value={draft ?? shown}
+          onChange={(e) => setDraft(e.target.value)}
+          onBlur={commit}
+          onKeyDown={(e) => e.key === "Enter" && commit()}
+          className="w-full min-w-0 bg-transparent text-stone-900 outline-none"
+          aria-label={ariaLabel}
+        />
+        {suffix && <span className="text-stone-400">{suffix}</span>}
+      </span>
+    </label>
   );
 }

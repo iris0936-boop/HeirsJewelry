@@ -15,7 +15,7 @@ export default async function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-stone-50">
+      <section className="bg-accent-soft">
         <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6">
           <p className="text-sm uppercase tracking-[0.2em] text-stone-500">Certified diamonds · Custom design</p>
           <h1 className="mx-auto mt-4 max-w-3xl font-serif text-5xl leading-tight text-stone-900 sm:text-6xl">
@@ -26,8 +26,8 @@ export default async function Home() {
             to create a setting that is entirely yours.
           </p>
           <div className="mt-10 flex justify-center gap-4">
-            <Link href="/diamonds" className="rounded-full bg-stone-900 px-6 py-3 text-white hover:bg-stone-700">
-              Browse diamonds
+            <Link href="/ring-builder" className="btn-accent">
+              Build your ring
             </Link>
             <Link
               href="/designs"
@@ -47,7 +47,7 @@ export default async function Home() {
             <Link
               key={s}
               href={`/diamonds?shape=${s}`}
-              className="flex flex-col items-center gap-2 rounded-2xl border border-stone-200 p-4 text-sm text-stone-600 transition hover:border-stone-900 hover:text-stone-900"
+              className="flex flex-col items-center gap-2 rounded-2xl border border-stone-200 p-4 text-sm text-stone-600 transition hover:border-accent hover:bg-accent-soft hover:text-stone-900"
             >
               <ShapeIcon shape={s} className="h-10 w-10" />
               {s}
@@ -109,7 +109,7 @@ export default async function Home() {
             ))}
           </div>
           <div className="mt-12 text-center">
-            <Link href="/custom" className="rounded-full bg-white px-6 py-3 text-stone-900 hover:bg-stone-200">
+            <Link href="/custom" className="btn-accent">
               Start a custom piece
             </Link>
           </div>

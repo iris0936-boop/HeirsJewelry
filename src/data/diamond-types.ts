@@ -39,6 +39,8 @@ export interface Diamond {
   images: string[]; // paths under /public or full URLs
   description?: string;
   available: boolean;
+  /** Shopify variant ID. Present only when inventory comes from Shopify; required for online checkout. */
+  variantId?: string;
 }
 
 export function formatPrice(n: number) {

@@ -70,7 +70,7 @@ export function InquiryForm({ sku, design }: { sku?: string; design?: string }) 
       <button
         type="submit"
         disabled={pending}
-        className="rounded-full bg-stone-900 px-6 py-3 text-white hover:bg-stone-700 disabled:opacity-50"
+        className="btn-accent disabled:opacity-50"
       >
         {pending ? "Sending…" : "Send inquiry"}
       </button>

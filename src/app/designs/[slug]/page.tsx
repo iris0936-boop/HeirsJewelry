@@ -4,6 +4,7 @@ import { DesignImage } from "@/components/DesignCard";
 import { DiamondCard } from "@/components/DiamondCard";
 import { designs, getDesign } from "@/data/designs";
 import { formatPrice, getDiamonds } from "@/data/diamonds";
+import { getSetting } from "@/data/settings";
 
 // Re-check inventory every 60s (keep in sync with INVENTORY_REVALIDATE_SECONDS).
 export const revalidate = 60;
@@ -17,7 +18,8 @@ export default async function DesignPage({ params }: { params: Promise<{ slug: s
   const design = getDesign(slug);
   if (!design) notFound();
 
-  const stones = (await getDiamonds()).slice(0, 3);
+  const [allStones, setting] = await Promise.all([getDiamonds(), getSetting(slug)]);
+  const stones = allStones.slice(0, 3);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
@@ -40,13 +42,21 @@ export default async function DesignPage({ params }: { params: Promise<{ slug: s
             </p>
           )}
           <p className="mt-6 text-stone-600">{design.description}</p>
-          <div className="mt-8">
-            <Link
-              href={`/custom?design=${design.slug}`}
-              className="rounded-full bg-stone-900 px-6 py-3 text-white hover:bg-stone-700"
-            >
-              Start with this design
-            </Link>
+          <div className="mt-8 flex flex-wrap gap-3">
+            {setting ? (
+              <>
+                <Link href={`/ring-builder/settings/${setting.slug}`} className="btn-accent">
+                  Build a ring with this setting
+                </Link>
+                <Link href={`/custom?design=${design.slug}`} className="btn-outline">
+                  Customize it
+                </Link>
+              </>
+            ) : (
+              <Link href={`/custom?design=${design.slug}`} className="btn-accent">
+                Start with this design
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -23,10 +23,10 @@ export function DiamondImage({ diamond, className = "" }: { diamond: Diamond; cl
   );
 }
 
-export function DiamondCard({ diamond }: { diamond: Diamond }) {
+export function DiamondCard({ diamond, query = "" }: { diamond: Diamond; query?: string }) {
   return (
     <Link
-      href={`/diamonds/${diamond.sku}`}
+      href={`/diamonds/${diamond.sku}${query}`}
       className="group overflow-hidden rounded-2xl border border-stone-200 bg-white transition hover:-translate-y-0.5 hover:shadow-lg"
     >
       <div className="aspect-square overflow-hidden">
@@ -39,7 +39,13 @@ export function DiamondCard({ diamond }: { diamond: Diamond }) {
         <p className="mt-1 text-sm text-stone-500">
           {diamond.cut} · {diamond.color} · {diamond.clarity} · {diamond.lab}
         </p>
-        <p className="mt-1 text-xs uppercase tracking-wider text-stone-400">{diamond.origin}</p>
+        <span
+          className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[11px] uppercase tracking-wider ${
+            diamond.origin === "Lab Grown" ? "bg-accent text-stone-900" : "bg-stone-100 text-stone-600"
+          }`}
+        >
+          {diamond.origin}
+        </span>
         <p className="mt-3 text-lg font-semibold text-stone-900">{formatPrice(diamond.price)}</p>
       </div>
     </Link>
