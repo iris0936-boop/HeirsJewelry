@@ -16,7 +16,7 @@ export default async function SettingPage({
   const [setting, diamond] = await Promise.all([getSetting(slug), sku ? getDiamond(sku) : undefined]);
   if (!setting) notFound();
 
-  const options = setting.options.filter((o) => o.available);
+  const options = setting.options;
   const selected = options.find((o) => o.metal === metal) ?? options[0];
 
   // With a diamond chosen, go straight to review. Without one, go pick a diamond (carrying the setting along).

@@ -189,7 +189,7 @@ export async function createCheckout(input: {
   lines: CartLineInput[];
   attributes?: { key: string; value: string }[];
   note?: string;
-}): Promise<{ checkoutUrl: string } | { error: string }> {
+}): Promise<{ checkoutUrl: string } | { error: string; rejectedIds?: string[] }> {
   const data = await storefront<{
     cartCreate: {
       cart: { checkoutUrl: string; lines: { nodes: { merchandise: { id: string } }[] } } | null;
@@ -201,10 +201,9 @@ export async function createCheckout(input: {
   if (userErrors.length) return { error: userErrors.map((e) => e.message).join("; ") };
   if (!cart) return { error: "Shopify did not return a cart" };
 
-  // Shopify can drop lines that are no longer available (e.g. a diamond that just sold).
+  // Shopify silently drops lines it won't sell (tracked inventory at 0, e.g. a diamond that just sold).
   const added = new Set(cart.lines.nodes.map((l) => l.merchandise.id));
-  if (input.lines.some((l) => !added.has(l.merchandiseId))) {
-    return { error: "One of these items is no longer available." };
-  }
+  const rejectedIds = input.lines.map((l) => l.merchandiseId).filter((id) => !added.has(id));
+  if (rejectedIds.length) return { error: "One of these items is no longer available.", rejectedIds };
   return { checkoutUrl: cart.checkoutUrl };
 }

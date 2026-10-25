@@ -2,6 +2,7 @@
 //
 // When INVENTORY_SOURCE=shopify: Shopify products with product type "Setting".
 //   Each product has a "Metal" option; each variant's price is the fixed setting price for that metal.
+//   Settings are made to order, so Shopify inventory/stock is ignored: every metal is always offered.
 // Otherwise: the "Engagement Rings" designs in designs.ts that list `metals`.
 
 import { cache } from "react";
@@ -12,7 +13,6 @@ import { INVENTORY_REVALIDATE_SECONDS, inventoryFromShopify } from "./diamonds";
 export interface SettingOption {
   metal: string;
   price: number;
-  available: boolean;
   /** Shopify variant ID. Required for online checkout. */
   variantId?: string;
 }
@@ -42,7 +42,6 @@ const loadAll = cache(async (): Promise<Setting[]> => {
           .map((v) => ({
             metal: v.selectedOptions.find((o) => o.name.toLowerCase() === "metal")?.value ?? "",
             price: Number(v.price.amount),
-            available: v.availableForSale,
             variantId: v.id,
           }))
           .filter((o) => {
@@ -63,13 +62,12 @@ const loadAll = cache(async (): Promise<Setting[]> => {
       name: d.name,
       description: d.description,
       images: d.images,
-      options: d.metals!.map((m) => ({ metal: m.name, price: m.price, available: true })),
+      options: d.metals!.map((m) => ({ metal: m.name, price: m.price })),
     }));
 });
 
-/** Settings with at least one metal available. */
 export async function getSettings(): Promise<Setting[]> {
-  return (await loadAll()).filter((s) => s.options.some((o) => o.available));
+  return loadAll();
 }
 
 export async function getSetting(slug: string): Promise<Setting | undefined> {
@@ -77,5 +75,5 @@ export async function getSetting(slug: string): Promise<Setting | undefined> {
 }
 
 export function lowestPrice(s: Setting): number {
-  return Math.min(...s.options.filter((o) => o.available).map((o) => o.price));
+  return Math.min(...s.options.map((o) => o.price));
 }

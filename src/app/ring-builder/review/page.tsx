@@ -18,7 +18,7 @@ export default async function ReviewPage({
     sku ? getDiamond(sku) : undefined,
     slug ? getSetting(slug) : undefined,
   ]);
-  const option = setting?.options.find((o) => o.metal === metal && o.available);
+  const option = setting?.options.find((o) => o.metal === metal);
 
   if (!diamond || !setting || !option) {
     return (

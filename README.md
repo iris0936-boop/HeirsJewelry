@@ -119,7 +119,7 @@ ignored and logged (Vercel → Logs).
 | Product type | `Setting` (exactly) |
 | Options | One option named `Metal`, e.g. 14k White Gold, 18k Yellow Gold, Platinum |
 | Variant prices | The fixed setting price for each metal |
-| Inventory | Don't track (made to order), or "Continue selling when out of stock" |
+| Inventory | Turn **off** "Track quantity" (or turn on "Continue selling when out of stock"). The site always shows every metal because settings are made to order, but Shopify's checkout still refuses a tracked variant at 0. |
 | Handle | Optional: match a design slug in `src/data/designs.ts` (e.g. `pave-halo`) to show "Build a ring with this setting" on that design page |
 
 Ring size is not a variant. Shoppers choose it on the review page, and it's saved on the order line.

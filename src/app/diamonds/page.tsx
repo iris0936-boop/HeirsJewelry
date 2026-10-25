@@ -15,7 +15,7 @@ export default async function DiamondsPage({
 
   // If the shopper already picked a setting, keep it while they choose a stone.
   const setting = slug ? await getSetting(slug) : undefined;
-  const option = setting?.options.find((o) => o.metal === metal && o.available);
+  const option = setting?.options.find((o) => o.metal === metal);
   const cardQuery = setting && option ? builderHref("", { setting: setting.slug, metal: option.metal }) : "";
 
   return (

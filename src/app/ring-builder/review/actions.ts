@@ -23,7 +23,7 @@ export async function checkoutRing(_prev: CheckoutState, formData: FormData): Pr
 
   const [diamond, setting] = await Promise.all([getDiamond(sku), getSetting(slug)]);
   if (!diamond) return { error: "Sorry, this diamond was just sold. Please choose another stone." };
-  const option = setting?.options.find((o) => o.metal === metal && o.available);
+  const option = setting?.options.find((o) => o.metal === metal);
   if (!setting || !option) return { error: "That setting and metal combination is no longer available." };
 
   if (!shopifyConfigured() || !diamond.variantId || !option.variantId) {
@@ -62,6 +62,16 @@ export async function checkoutRing(_prev: CheckoutState, formData: FormData): Pr
     return { error: "We couldn't start checkout. Please try again in a moment." };
   }
 
-  if ("error" in result) return { error: result.error };
+  if ("error" in result) {
+    if (result.rejectedIds?.includes(option.variantId)) {
+      // Settings are made to order, so this is a Shopify product setup problem, not a sold-out ring.
+      console.error(
+        `[checkout] Shopify refused setting "${setting.slug}" (${metal}, ${option.variantId}). ` +
+          "In Shopify, turn off 'Track quantity' for this setting, or turn on 'Continue selling when out of stock'.",
+      );
+      return { error: "We couldn't start checkout for this setting. Please contact us and we'll send a payment link." };
+    }
+    return { error: result.error };
+  }
   redirect(result.checkoutUrl);
 }

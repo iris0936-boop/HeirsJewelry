@@ -99,7 +99,7 @@ export function SettingCard({ setting, href }: { setting: Setting; href: string 
       <div className="p-4">
         <p className="font-medium text-stone-900">{setting.name}</p>
         <p className="mt-1 text-sm text-stone-500">
-          {setting.options.filter((o) => o.available).length} metals · from {formatPrice(lowestPrice(setting))}
+          {setting.options.length} {setting.options.length === 1 ? "metal" : "metals"} · from {formatPrice(lowestPrice(setting))}
         </p>
       </div>
     </Link>
